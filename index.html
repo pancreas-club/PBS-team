@@ -45,6 +45,27 @@ a { color: var(--primary); text-decoration: none; }
   .nav-menu { display: flex; gap: 16px; font-size: 16px !important; }
   main { padding-bottom: 40px; }
 
+/* ハンバーガーボタン（スマホ用） */
+.nav-toggle {
+  display: none;             /* PCでは非表示 */
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  padding: 0;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--text-main);
+  margin: 5px 0;
+  border-radius: 999px;
+}
+
+
 .hero {
   background: #f2f7fc;   /* 単色のやわらかい青 */
   padding: 36px 0;
@@ -102,8 +123,48 @@ a { color: var(--primary); text-decoration: none; }
     font-size: 12px; color: var(--text-muted); background: #fff;
   }
 
-  @media (max-width: 640px){
-    .nav-menu { display: none; }
+@media (max-width: 640px) {
+  .nav {
+    position: relative; /* メニューをこの中で重ねるため */
+  }
+
+  /* タイトル+ハンバーガーだけ横並びにして、
+     右上にボタンを出す */
+  .nav-title {
+    font-size: 18px;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    margin-top: 8px;
+    background: #ffffff;
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: none;             /* デフォルト隠す */
+    flex-direction: column;    /* 縦並び */
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 20;
+  }
+
+  /* 開いているときの状態（JSでこのクラスを付ける） */
+  .nav-menu.is-open {
+    display: flex;
+  }
+
+  /* ハンバーガーボタンをスマホでだけ表示 */
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
     .two-col { grid-template-columns: 1fr; }
   }
 
@@ -164,7 +225,12 @@ a { color: var(--primary); text-decoration: none; }
   <div class="container">
     <div class="nav">
       <div class="nav-title">関西医科大学附属病院 胆膵外科</div>
-      <nav class="nav-menu">
+<button class="nav-toggle" aria-expanded="false" aria-controls="global-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-menu" id="global-nav">
         <a href="#about">概要</a>
         <a href="#feature">特色</a>
         <a href="#disease">対象疾患</a>
@@ -862,6 +928,19 @@ a { color: var(--primary); text-decoration: none; }
     &copy; 2026 関西医科大学附属病院 胆膵外科
   </div>
 </footer>
+<script>
+  (function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-menu');
+
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', function () {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  })();
+</script>
 
 </body>
 </html>
