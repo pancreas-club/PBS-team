@@ -1,8 +1,8 @@
 <head>
   <meta charset="UTF-8">
-  <title>関西医科大学附属病院 胆膵外科</title>
+  <title>関西医科大学 胆膵外科</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="関西医科大学附属病院 胆膵外科の紹介ページです。膵臓がん、胆道がん、胆のうがん、胆石症、胆のう炎、膵炎など胆膵領域の診療・手術・集学的治療についてご案内します。">
+  <meta name="description" content="関西医科大学 胆膵外科の紹介ページです。膵臓がん、胆道がん、胆のうがん、胆石症、胆のう炎、膵炎など胆膵領域の診療・手術・集学的治療についてご案内します。">
   <style>
   :root {
   /* 少し落ち着いた青＋全体的にやわらかい色味 */
@@ -65,6 +65,10 @@ a { color: var(--primary); text-decoration: none; }
   border-radius: 999px;
 }
 
+/* ハンバーガー線の色を最強固定で黒にする（スマホの白化バグ対策） */
+.nav-toggle span {
+  background-color: #333 !important;
+}
 
 .hero {
   background: #f2f7fc;   /* 単色のやわらかい青 */
@@ -216,6 +220,7 @@ a { color: var(--primary); text-decoration: none; }
     flex-direction: row;
   }
 }
+
 
   </style>
 </head>
